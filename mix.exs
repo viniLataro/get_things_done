@@ -53,7 +53,10 @@ defmodule GetThingsDone.MixProject do
       {:plug_cowboy, "~> 2.5"},
 
       # dev
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+
+      # test
+      {:faker, "~> 0.17", only: [:dev, :test]}
     ]
   end
 
