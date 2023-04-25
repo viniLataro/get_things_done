@@ -56,6 +56,7 @@ defmodule GetThingsDone.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
 
       # test
+      {:ex_machina, "~> 2.7", only: [:test]},
       {:faker, "~> 0.17", only: [:dev, :test]}
     ]
   end

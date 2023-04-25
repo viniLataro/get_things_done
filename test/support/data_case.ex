@@ -24,6 +24,7 @@ defmodule GetThingsDone.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import GetThingsDone.DataCase
+      import Core.Factory
     end
   end
 
