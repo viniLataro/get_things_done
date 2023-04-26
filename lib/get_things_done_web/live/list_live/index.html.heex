@@ -7,11 +7,7 @@
   </:actions>
 </.header>
 
-<.table
-  id="lists"
-  rows={@streams.lists}
-  row_click={fn {_id, list} -> JS.navigate(~p"/lists/#{list}") end}
->
+<.table id="lists" rows={@streams.lists} row_click={fn {_id, list} -> JS.navigate(~p"/lists/#{list}") end}>
   <:col :let={{_id, list}} label="Title"><%= list.title %></:col>
   <:action :let={{_id, list}}>
     <div class="sr-only">
@@ -20,10 +16,7 @@
     <.link patch={~p"/lists/#{list}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, list}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: list.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
+    <.link phx-click={JS.push("delete", value: %{id: list.id}) |> hide("##{id}")} data-confirm="Are you sure?">
       Delete
     </.link>
   </:action>
@@ -35,6 +28,7 @@
     id={@list.id || :new}
     title={@page_title}
     action={@live_action}
+    current_user={@current_user}
     list={@list}
     patch={~p"/lists"}
   />

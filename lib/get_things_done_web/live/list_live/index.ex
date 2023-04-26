@@ -6,7 +6,9 @@ defmodule GetThingsDoneWeb.ListLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :lists, Lists.list_lists())}
+    current_user = socket.assigns.current_user
+
+    {:ok, stream(socket, :lists, Lists.list_lists(current_user.id, preload: [:user]))}
   end
 
   @impl true
