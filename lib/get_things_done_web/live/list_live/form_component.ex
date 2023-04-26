@@ -14,7 +14,6 @@ defmodule GetThingsDoneWeb.ListLive.FormComponent do
 
       <.simple_form for={@form} id="list-form" phx-target={@myself} phx-change="validate" phx-submit="save">
         <.input field={@form[:title]} type="text" label="Title" />
-        <.input field={@form[:user_id]} type="text" label="User ID" />
         <:actions>
           <.button phx-disable-with="Saving...">Save List</.button>
         </:actions>
@@ -44,6 +43,8 @@ defmodule GetThingsDoneWeb.ListLive.FormComponent do
   end
 
   def handle_event("save", %{"list" => list_params}, socket) do
+    list_params = Map.put(list_params, "user_id", socket.assigns.current_user.id)
+
     save_list(socket, socket.assigns.action, list_params)
   end
 
