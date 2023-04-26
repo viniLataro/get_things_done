@@ -1,4 +1,5 @@
 defmodule GetThingsDoneWeb.Router do
+  alias Mix.Tasks.Deps.Get
   use GetThingsDoneWeb, :router
 
   import GetThingsDoneWeb.UserAuth
@@ -21,6 +22,15 @@ defmodule GetThingsDoneWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live_session :authenticated, on_mount: {GetThingsDoneWeb.UserAuth, :ensure_authenticated} do
+      live "/lists", ListLive.Index, :index
+      live "/lists/new", ListLive.Index, :new
+      live "/lists/:id/edit", ListLive.Index, :edit
+
+      live "/lists/:id", ListLive.Show, :show
+      live "/lists/:id/show/edit", ListLive.Show, :edit
+    end
   end
 
   # Other scopes may use custom stacks.
