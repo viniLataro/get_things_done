@@ -17,8 +17,15 @@ defmodule GetThingsDone.Lists do
       [%List{}, ...]
 
   """
-  def list_lists do
-    Repo.all(List)
+  def list_lists(user_id, opts \\ []) do
+    q =
+      from(l in List,
+        where: l.user_id == ^user_id,
+        order_by: [asc: l.title],
+        preload: ^Keyword.get(opts, :preload, [])
+      )
+
+    Repo.all(q)
   end
 
   @doc """
@@ -35,7 +42,15 @@ defmodule GetThingsDone.Lists do
       ** (Ecto.NoResultsError)
 
   """
-  def get_list!(id), do: Repo.get!(List, id)
+  def get_list!(id, opts \\ []) do
+    q =
+      from(l in List,
+        where: l.id == ^id,
+        preload: ^Keyword.get(opts, :preload, [])
+      )
+
+    Repo.one!(q)
+  end
 
   @doc """
   Creates a list.
