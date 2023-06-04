@@ -3,6 +3,7 @@ defmodule GetThingsDone.Lists.List do
   import Ecto.Changeset
 
   alias GetThingsDone.Accounts.User
+  alias GetThingsDone.Tasks.Task
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -11,6 +12,7 @@ defmodule GetThingsDone.Lists.List do
     field :title, :string
 
     belongs_to :user, User
+    has_many :tasks, Task
 
     timestamps()
   end

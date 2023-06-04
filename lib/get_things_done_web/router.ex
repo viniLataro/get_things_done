@@ -1,5 +1,4 @@
 defmodule GetThingsDoneWeb.Router do
-  alias Mix.Tasks.Deps.Get
   use GetThingsDoneWeb, :router
 
   import GetThingsDoneWeb.UserAuth
